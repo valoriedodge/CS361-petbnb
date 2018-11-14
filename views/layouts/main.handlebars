@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+	<title>Petbnb</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    {{#each jsscripts}}
+    <script src="/static/{{this}}"></script>
+    {{/each}}
+</head>
+<body>
+<div class="navbar">
+  <a href="/">Main Page</a>
+  <a href="/accounts">Login</a>
+  <a href="/register">Register</a>
+</div>
+
+<div class="main">
+	{{{body}}}
+</div>
+</body>
+</html>
