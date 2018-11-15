@@ -1,0 +1,44 @@
+<--! landing page form --!>
+<form id="searchListing" action="/" method="post">
+	<legend>PetBnB</legend>
+    <div>Find lodging for your pet when you're away...</div>
+    
+    <title>Where are you searching</title>
+    	<input type="text" pattern="[0-9]{5}" placeholder="Zipcode">
+    
+    <br>
+  
+  	Drop Off Date
+    	<input type="date" id="start-date" name="start" value="2018-12-01" min="2018-01-01" max="2019-12-31">
+  
+  	Pick Up Date
+    	<input type="date" id="end-date" name="end" value="2018-12-01" min="2018-01-01" max="2019-12-31">
+	
+    <br>
+  	<br>
+     
+    <div>
+	Pet Type
+		<select>
+  			<option value="dog" id="dog-type">Dog</option>
+  			<option value="cat" id="cat-type"+>Cat</option>
+  			<option value="bird" id="bird-type">Bird</option>
+  			<option value="other" id="other-type">Other</option>
+		</select> 
+    </div>
+    
+    <div>
+    Number of Pets
+    	<select>
+  			<option value="1" id="">1</option>
+ 	 		<option value="2" id="">2</option>
+  			<option value="3" id="">3</option>
+  			<option value="4" id="">4</option>
+		</select> 
+    </div>
+    <input type="submit" value="Search" >
+</form>
+
+<a href="/accounts">Login</a>
+
+<a href="/register">Register</a>
