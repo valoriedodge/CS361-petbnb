@@ -22,7 +22,7 @@ module.exports = function(){
             }else{
                 console.log(results[0])
                 if (results[0] != undefined) {
-                    res.redirect('/');
+                    res.redirect('/search');
                 }
                 else {
                     res.redirect('/accounts');

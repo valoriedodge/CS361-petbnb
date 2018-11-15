@@ -13,6 +13,7 @@ app.set('port', 9402);
 app.set('mysql', mysql);
 app.use('/accounts', require('./account.js'));
 app.use('/register', require('./register.js'));
+app.use('/search', require('./search.js'));
 app.use('/pets', require('./pets.js'));
 app.use('/', express.static('public'));
 
