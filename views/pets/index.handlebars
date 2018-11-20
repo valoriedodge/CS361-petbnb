@@ -1,0 +1,28 @@
+<div class="container">
+    <header class="jumbotron">
+        <div class="container">
+            <h1>Welcome to PetBnb!</h1>
+            <p>View your pets</p>
+            <p><a class="btn btn-primary btn-lg" href="/pets/new">Add New Pet</a></p>
+        </div>
+    </header>
+    <div class="row text-center" style="display:flex; flex-wrap:wrap;">
+        {{#each Pets}}
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                    <img src="{{pet_picture}}">
+                    <div class="caption">
+                        <h4>{{pet_name}}</h4>
+                    </div>
+                    <div>
+                        <a href="/pet/{{pet_id}}" class="btn btn-primary" style="float: left">More Info</a>
+                        <a class="btn btn-warning" href="/pets/{{pet_id}}/edit" style="float: center">Edit</a>
+                        <form action="/pets/{{pet_id}}?_method=DELETE" method="POST" class="delete-form" style="float: right">
+                                <button class="btn btn-danger">Delete</button>
+                                </form>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>

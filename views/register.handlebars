@@ -1,14 +1,28 @@
-<h3>Register an Account:</h3>
-<form id="addaccount" action="/register" method="post">
-    Username: <input type="text" name="username" required><br>
-    Address: <input type="text" name="address" required><br>
-    Phone Number: <input type="text" name="number" required><br>
-    Email:<input type="text" name="email" required><br>
-    Password: <input type="password" name="password" required><br>
-    Account Type:
-    <select name="acc_type" required>
-    <option value="pet_owner">Pet Owner</option>
-    <option value="host">Host</option>
-    </select><br>
-    <input type="submit" value="Submit"><br>
- </form>
+<div class="row">
+    <h1 style="text-align: center">Sign Up</h1>
+    <div style="width: 30%; margin: 25px auto;">
+        <form action="/register" id="addaccount" method="post">
+            <div class="form-group">
+                <input class="form-control" type="text" name="username" placeholder="Username">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" name="address" placeholder="Address">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" name="number" placeholder="Phone Number">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="password" name="password" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <select name="acc_type" required>
+                    <option value="pet_owner">Pet Owner</option>
+                    <option value="host">Host</option>
+                </select><br>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-lg btn-primary btn-block">Sign Up!</button>
+            </div>
+        </form>
+    </div>
+</div>

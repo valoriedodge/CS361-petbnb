@@ -1,34 +1,48 @@
-var express = require('express');
-var mysql = require('./dbcon.js');
-var bodyParser = require('body-parser');
+var express        = require("express"),
+    bodyParser     = require("body-parser"),
+    mongoose       = require("mongoose"),
+    passport       = require("passport"),
+    LocalStrategy  = require("passport-local"),
+    methodOverride = require("method-override"),
+    handlebars     = require('express-handlebars').create({defaultLayout:'main'}),
+    mysql          = require('./dbcon.js'),
+    app            = express();
 
-var app = express();
-var handlebars = require('express-handlebars').create({defaultLayout:'main'});
+var PORT = 5002;
 
-app.engine('handlebars', handlebars.engine);
-app.use(bodyParser.urlencoded({extended:true}));
-app.use('/static', express.static('public'));
+// requiring routes
+var indexRoutes   = require("./routes/index"),
+    listingRoutes  = require("./routes/listings"),
+    petRoutes   = require("./routes/pets");
+
+app.engine('handlebars', handlebars.engine); 
 app.set('view engine', 'handlebars');
-app.set('port', 9402);
 app.set('mysql', mysql);
-app.use('/accounts', require('./account.js'));
-app.use('/register', require('./register.js'));
-app.use('/search', require('./search.js'));
-app.use('/pets', require('./pets.js'));
-app.use('/', express.static('public'));
+app.use(bodyParser.urlencoded({extended: true}));
+
+app.use('/static', express.static('public')); // static directory is going to be our directory called public
+
+// PASSPORT CONFIGURATION
+app.use(require("express-session")({
+    secret: "Once again Rusty wins cutest dog!",
+    resave: false,
+    saveUninitialized: false
+}));
+
+app.use(methodOverride("_method")); // _method is what we are telling it to look for
 
 
-app.use(function(req,res){
-  res.status(404);
-  res.render('404');
+// w/e function we provide to it will be called on every route
+app.use(function(req, res, next){
+    // w/e we put in res.locals is what's available inside of our template
+    res.locals.currentUser = req.user;
+    next();
 });
+// Shortens the route declarations
+app.use("/", indexRoutes); // landing page, login page, register page, search page, accounts page.
+app.use("/listings", listingRoutes);
+app.use("/pets", petRoutes);
 
-app.use(function(err, req, res, next){
-  console.error(err.stack);
-  res.status(500);
-  res.render('500');
-});
-
-app.listen(app.get('port'), function(){
-  console.log('Express started on http://localhost:' + app.get('port') + '; press Ctrl-C to terminate.');
+app.listen(PORT, process.env.IP, function(){
+    console.log("server started on port ", PORT);
 });
