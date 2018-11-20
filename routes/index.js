@@ -9,10 +9,10 @@ router.get("/", function(req, res){
 });
 
 // accounts route
-router.get('/accounts', function(req, res){
-    res.render('accounts');
+router.get('/login', function(req, res){
+    res.render('login');
 });
-router.post('/accounts', function(req, res){
+router.post('/login', function(req, res){
     console.log(req.body)
     var mysql = req.app.get('mysql');
     var sql = "SELECT user_name FROM Accounts WHERE user_pw = ?";
@@ -28,14 +28,10 @@ router.post('/accounts', function(req, res){
                 res.redirect('/search');
             }
             else {
-                res.redirect('/accounts');
+                res.redirect('/login');
             }
         }
     });
-});
-// show login form
-router.get("/login", function(req, res){
-   res.render("login"); 
 });
 
 // show register form
@@ -47,15 +43,15 @@ router.get("/register", function(req, res){
 router.post("/register", function(req, res) {
     console.log(req.body)
     var mysql = req.app.get('mysql');
-    var sql = "INSERT INTO `Accounts` (user_name, user_address, phone_number, user_email, user_pw, acc_type) VALUES (?, ?, ?, ?, ?, ?)";
-    var inserts = [req.body.username, req.body.address, req.body.number, req.body.email, req.body.password, req.body.acc_type];
+    var sql = "INSERT INTO `Accounts` (user_name, user_email, user_address, phone_number, user_pw, acc_type) VALUES (?, ?, ?, ?, ?, ?)";
+    var inserts = [req.body.username, req.body.email, req.body.address, req.body.number, req.body.password, req.body.acc_type];
     sql = mysql.pool.query(sql,inserts,function(error, results, fields){
         if(error){
             console.log(JSON.stringify(error))
             res.write(JSON.stringify(error));
             res.end();
         }else{
-            res.redirect('/accounts');
+            res.redirect('/search');
         }
 	});
 });
