@@ -16,7 +16,7 @@ router.post('/login', function(req, res){
     console.log(req.body)
     var mysql = req.app.get('mysql');
     var sql = "SELECT user_name FROM Accounts WHERE user_pw = ?";
-    var inserts = [req.body.password];        
+    var inserts = [req.body.user_pw];        
     sql = mysql.pool.query(sql,inserts,function(error, results, fields){
         if(error){
             console.log(JSON.stringify(error))
@@ -44,7 +44,7 @@ router.post("/register", function(req, res) {
     console.log(req.body)
     var mysql = req.app.get('mysql');
     var sql = "INSERT INTO `Accounts` (user_name, user_email, user_address, phone_number, user_pw, acc_type) VALUES (?, ?, ?, ?, ?, ?)";
-    var inserts = [req.body.username, req.body.email, req.body.address, req.body.number, req.body.password, req.body.acc_type];
+    var inserts = [req.body.user_name, req.body.user_email, req.body.user_address, req.body.phone_number, req.body.user_pw, req.body.acc_type];
     sql = mysql.pool.query(sql,inserts,function(error, results, fields){
         if(error){
             console.log(JSON.stringify(error))
