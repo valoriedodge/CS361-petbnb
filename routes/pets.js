@@ -30,12 +30,8 @@ router.get("/new", function(req, res){
     res.render('pets/new');
 });
 // SHOW - Show more info about one pet
-<<<<<<< HEAD
 router.get("/:id", function(req, res){
     console.log("In show route");
-=======
-router.get("/:id/show", function(req, res){
->>>>>>> 8855c568cf7c15d73f79b2e1f2edc55090a35215
     var context = {};
     var mysql = req.app.get('mysql');
     getPet(res, mysql, context, req.params.id, complete);
