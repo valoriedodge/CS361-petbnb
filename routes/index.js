@@ -15,8 +15,8 @@ router.get('/login', function(req, res){
 router.post('/login', function(req, res){
     console.log(req.body)
     var mysql = req.app.get('mysql');
-    var sql = "SELECT user_name FROM Accounts WHERE user_pw = ?";
-    var inserts = [req.body.user_pw];        
+    var sql = "SELECT user_name FROM Accounts WHERE user_name = ? AND user_pw = ?";
+    var inserts = [req.body.user_name, req.body.user_pw];        
     sql = mysql.pool.query(sql,inserts,function(error, results, fields){
         if(error){
             console.log(JSON.stringify(error))
