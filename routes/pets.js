@@ -28,7 +28,7 @@ router.get("/new", function(req, res){
     res.render('pets/new');
 });
 // SHOW - Show more info about one pet
-router.get("/:id", function(req, res){
+router.get("/:id/show", function(req, res){
     var context = {};
     var mysql = req.app.get('mysql');
     getPet(res, mysql, context, req.params.id, complete);
