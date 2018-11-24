@@ -13,7 +13,9 @@ router.get("/", function(req, res){
 router.post("/", function(req, res){
     var mysql = req.app.get('mysql');
     var sql = "INSERT INTO Pets (pet_name, pet_type, pet_breed, pet_weight, pet_picture, pet_diet, medications, special_needs) VALUES (?,?,?,?,?,?,?,?)";
+    console.log(req.body);
     var inserts = [req.body.pet_name, req.body.pet_type, req.body.pet_breed, req.body.pet_weight, req.body.pet_picture, req.body.pet_diet, req.body.medications, req.body.special_needs];
+    console.log("inserts", inserts);
     sql = mysql.pool.query(sql, inserts,function(error, results, fields){
         if(error){
             res.write(JSON.stringify(error));
@@ -29,11 +31,15 @@ router.get("/new", function(req, res){
 });
 // SHOW - Show more info about one pet
 router.get("/:id", function(req, res){
+    console.log("In show route");
     var context = {};
     var mysql = req.app.get('mysql');
     getPet(res, mysql, context, req.params.id, complete);
     function complete(){
-        res.render('pets/show', context);
+        if(context.pet == undefined)
+            res.render('500');
+        else
+            res.render('pets/show', context);
     }
 });
 // EDIT pet
@@ -42,7 +48,7 @@ router.get("/:id/edit", function(req, res){
     var mysql = req.app.get('mysql');
     getPet(res, mysql, context, req.params.id, complete);
     function complete(){
-        res.render('pets/edit', context);
+            res.render('pets/edit', context);
     }
 });
 // UPDATE pet
